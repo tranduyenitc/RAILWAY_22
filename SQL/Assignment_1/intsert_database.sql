@@ -1,5 +1,6 @@
--- INSERT DATA TO TABLE department
+USE manage_exams;
 
+-- INSERT DATA TO TABLE department
 INSERT INTO department(department_name)
 VALUES
 	(N'Marketing'),
@@ -115,3 +116,33 @@ VALUES
     ('209'	, 'hfdsrydy'	,	3			,   90		,   1		,'2020-04-07'),
     ('801'	, 'ynmetwu4u'	,	2			,   15		,   2		,'2020-04-07'),
     ('674'	, 'jye46uw'		,	1			,   17		,   1		,'2020-04-09');
+    
+-- INSERT DATA TO TABLE exam_question
+INSERT INTO exam_question
+	(exam_id	, question_id	)
+VALUES
+	(	1		,  		3		),
+    (	1		,  		5		),
+    (	2		,  		4		),
+    (	2		,  		7		),
+    (	3		,  		2		),
+    (	3		,  		4		),
+    (	4		,  		1		),
+    (	4		,  		4		),
+    (	5		,  		5		),
+    (	5		,  		1		);
+
+-- INSERT DATA TO TABLE group_account
+INSERT INTO group_account
+	(group_id	, account_id ,join_date	)
+VALUES
+	(	1		,  		1		,'2020-03-08'),
+    (	2		,  		2		,'2020-03-08'),
+    (	2		,  		1		,'2021-06-07'),
+    (	4		,  		1		,'2021-06-07'),
+    (	4		,  		4		,'2021-06-07'),
+    (	1		,  		3		,'2021-06-07'),
+    (	2		,  		3		,'2021-06-07'),
+    (	5		,  		5		,'2021-09-21'),
+    (	6		,  		5		,'2021-09-21'),
+    (	3		,  		2		,'2021-09-21');
