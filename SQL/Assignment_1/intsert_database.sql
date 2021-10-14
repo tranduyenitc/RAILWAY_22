@@ -29,7 +29,7 @@ VALUES
     ('Multiple-Choice'); 
 
 -- INSERT DATA TO TABLE category_question
-INSERT INTO category_question(catagory_name)
+INSERT INTO category_question(category_name)
 VALUES
 	('Java'),
     ('.Net'),
@@ -56,6 +56,7 @@ VALUES
     ('sontungmtp@gmail.com'				, 'tungnui'			,'Nguyen Thanh Tung'	,   '8'			,   '1'		,'2020-04-07'),
     ('duongghuu@gmail.com'				, 'duongghuu'		,'Duong Van Huu'		,   '9'			,   '2'		,'2020-04-07'),
     ('vtiaccademy@gmail.com'			, 'vtiaccademy'		,'Vi Ti Ai'				,   '10'		,   '1'		,'2020-04-09');
+
 
 -- INSERT DATA TO TABLE group
 INSERT INTO `group`
@@ -89,7 +90,7 @@ VALUES
     
 -- INSERT DATA TO TABLE answer
 INSERT INTO answer
-	(content																		, question_id	, iscorrect		)
+	(content																		, question_id	, is_correct		)
 VALUES
 	('SQL (Structured Query Language ) là ngôn ngữ truy vấn có cấu trúc '			,    1			,	1			),
 	('SQL (Structured Query Language ) là ngôn ngữ truy vấn '						,    1			,	0			),
@@ -146,3 +147,4 @@ VALUES
     (	5		,  		5		,'2021-09-21'),
     (	6		,  		5		,'2021-09-21'),
     (	3		,  		2		,'2021-09-21');
+
