@@ -52,9 +52,9 @@ GROUP BY q.question_id
 	HAVING COUNT(q.question_id) = 	(
 										SELECT COUNT(q.question_id)
                                         FROM questions q
-										INNER JOIN	exam_questions eq
-											ON	q.question_id = eq.question_id
-										GROUP BY q.question_id
+                                        INNER JOIN	exam_questions eq
+                                        ON	q.question_id = eq.question_id
+                                        GROUP BY q.question_id
                                         ORDER BY COUNT(q.question_id) DESC
                                         LIMIT 1
 									);
@@ -85,7 +85,7 @@ GROUP BY q.question_id
 	HAVING COUNT(q.question_id) = 	(
 										SELECT COUNT(q.question_id)
                                         FROM questions q
-										GROUP BY q.question_id
+                                        GROUP BY q.question_id
                                         ORDER BY COUNT(q.question_id) ASC
                                         LIMIT 1
 									);
@@ -120,8 +120,8 @@ LEFT JOIN answers a
 GROUP BY a.question_id
 	HAVING COUNT(a.question_id) = 	(
 										SELECT	COUNT(a.question_id)
-										FROM answers a
-										GROUP BY a.question_id
+                                        FROM answers a
+                                        GROUP BY a.question_id
                                         ORDER BY COUNT(a.question_id) DESC
                                         LIMIT 1
                                     );
@@ -135,8 +135,8 @@ LEFT JOIN answers a
 GROUP BY a.question_id
 	HAVING COUNT(a.question_id) = 	(
 										SELECT	COUNT(a.question_id)
-										FROM answers a
-										GROUP BY a.question_id
+                                        FROM answers a
+                                        GROUP BY a.question_id
                                         ORDER BY COUNT(a.question_id) ASC
                                         LIMIT 1
                                     );
@@ -171,8 +171,8 @@ LEFT JOIN accounts a
 GROUP BY	p.position_id
 	HAVING COUNT(p.position_id) =	(
 										SELECT	COUNT(a.position_id)
-										FROM accounts a 
-										GROUP BY	a.position_id
+                                        FROM accounts a 
+                                        GROUP BY	a.position_id
                                         ORDER BY	COUNT(a.position_id) ASC
                                         LIMIT 1
                                     );
@@ -189,8 +189,8 @@ LEFT JOIN accounts a
 GROUP BY	p.position_id
 	HAVING COUNT(p.position_id) =	(
 										SELECT	COUNT(a.position_id)
-										FROM accounts a 
-										GROUP BY	a.position_id
+                                        FROM accounts a 
+                                        GROUP BY	a.position_id
                                         ORDER BY	COUNT(a.position_id) DESC
                                         LIMIT 1
                                     );
@@ -206,8 +206,8 @@ LEFT JOIN accounts a
 GROUP BY	p.position_id
 	HAVING COUNT(p.position_id) =	(
 										SELECT	COUNT(a.position_id)
-										FROM accounts a 
-										GROUP BY	a.position_id
+                                        FROM accounts a 
+                                        GROUP BY	a.position_id
                                         ORDER BY	COUNT(a.position_id) DESC
                                         LIMIT 1
                                     );
@@ -362,16 +362,14 @@ GROUP BY ga.group_id
 	HAVING COUNT(ga.account_id) < 7;
     
 -- c) Ghép 2 kết quả từ câu a) và câu b)
-SELECT 	*,
-		COUNT(ga.account_id)
+SELECT 	*
 FROM accounts a 
 INNER JOIN	group_accounts ga
 	ON a.account_id = ga.account_id
 GROUP BY ga.group_id
 	HAVING COUNT(ga.account_id) > 5
 UNION ALL
-SELECT 	*,
-		COUNT(ga.account_id)
+SELECT 	*
 FROM accounts a 
 INNER JOIN	group_accounts ga
 	ON a.account_id = ga.account_id
