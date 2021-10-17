@@ -95,12 +95,20 @@ WHERE	length(fullname)	=	(
 
 -- Question 5: Lấy ra thông tin account có full name dài nhất và thuộc phòng ban có id 
 --  = 3
+-- C1 
 SELECT	*
 FROM	`accounts`
 GROUP BY	length(fullname)
 	HAVING	department_id = 3 AND MAX(length(fullname))
     ORDER BY	length(fullname) DESC
     LIMIT	1
+;
+-- C2
+SELECT	*
+FROM	`accounts`
+WHERE	department_id =3
+ORDER BY	length(fullname) DESC
+LIMIT 1
 ;
 
 -- Question 6: Lấy ra tên group đã tham gia trước ngày 20/12/2019
@@ -112,13 +120,26 @@ INNER JOIN	group_accounts ag
 WHERE	join_date < '20191220';
 
 -- Question 7: Lấy ra ID của question có >= 4 câu trả lời
-SELECT	q.question_id
-		-- COUNT(an.question_id)
+
+SELECT	q.question_id,
+		COUNT(an.question_id)
 FROM	questions q
 INNER JOIN	answers an
 	ON q.question_id = an.question_id
 GROUP BY an.question_id
 HAVING	COUNT(an.question_id) >= 4;
+
+-- lấy ra ID của question có ngày tạo trước ngày 2019-12-12 và có >=3 câu trả lời
+
+SELECT		*
+		-- q.create_date,
+--         q.question_id,
+--         COUNT(an.question_id)
+FROM	questions q
+INNER JOIN	answers an
+	ON q.question_id = an.question_id
+GROUP BY an.question_id
+HAVING	COUNT(an.question_id) >= 3 AND q.create_date < "20201212";
 
 -- Question 8: Lấy ra các mã đề thi có thời gian thi >= 60 phút và được tạo trước ngày 
 --  20/12/2019
@@ -134,6 +155,16 @@ ORDER BY	create_date DESC
 LIMIT	5;
 
 -- Question 10: Đếm số nhân viên thuộc department có id = 2
+SELECT *
+FROM accounts
+ORDER BY department_id;
+
+-- C1 
+SELECT COUNT(department_id) "So_NVPB_id_2"
+FROM accounts
+WHERE department_id = 2;
+
+-- C2
 SELECT	COUNT(dp.department_id) "So_NVPB_id_2"
 FROM	accounts a
 INNER JOIN	departments dp
@@ -147,17 +178,16 @@ FROM	`accounts`
 WHERE	fullname LIKE("D%o");
 
 -- Question 12: Xóa tất cả các exam được tạo trước ngày 20/12/2019
--- DELETE FROM exam_questions 
--- WHERE	exam_id IN(1,2,3);
-
--- DELETE FROM exams 
--- WHERE	exam_id IN(1,2,3);
-                        
+-- exam_questions -> exams
 SELECT	*
 FROM exams e
 INNER JOIN	exam_questions eq
 	ON	e.exam_id = eq.exam_id
 WHERE	e.createdate < '20191220';
+
+SELECT *
+FROM exams
+WHERE	createdate < '20191220';
 
 DELETE eq
       FROM exam_questions eq
@@ -165,18 +195,23 @@ DELETE eq
 		ON eq.exam_id = e.exam_id
  WHERE e.createdate < '20191220';
  
-SELECT *
-FROM exams
-WHERE	createdate < '20191220';
+-- C1
+-- DELETE 	exams.*,
+-- 		exam_questions.*
+-- FROM	exams
+-- INNER JOIN	exam_questions
+-- 	ON	exams.exam_id = exam_questions.exam_id
+-- WHERE	exams.createdate < '20191220';
 
-DELETE FROM exams
-WHERE createdate < '20191220';
+-- C2 
+-- DELETE 	exams.*,
+-- 		exam_questions.*
+-- FROM	exams,
+-- 		exam_questions
+-- WHERE	exams.exam_id = exam_questions.exam_id AND exams.createdate < '20191220';
+-- -- 
 
 -- Question 13: Xóa tất cả các question có nội dung bắt đầu bằng từ "câu hỏi"
-SELECT	*
-FROM	questions
-WHERE	content LIKE('câu hỏi%');
-
 --  exam_questions =>  answers => questions 
 --  DELETE dexam_questions
 SELECT	*
@@ -185,6 +220,16 @@ INNER JOIN	questions qs
 	ON	e.question_id = qs.question_id
 WHERE	qs.content LIKE('câu hỏi%');
 
+SELECT	*
+FROM	answers a
+INNER JOIN	questions qs
+	ON	a.question_id = qs.question_id
+WHERE	qs.content LIKE('câu hỏi%');
+
+SELECT	*
+FROM	questions
+WHERE	content LIKE('câu hỏi%');
+
 DELETE	e
 FROM	exam_questions e
 INNER JOIN	questions qs
@@ -192,12 +237,6 @@ INNER JOIN	questions qs
 WHERE	qs.content LIKE('câu hỏi%');
 
 --  DELETE answers
-SELECT	*
-FROM	answers a
-INNER JOIN	questions qs
-	ON	a.question_id = qs.question_id
-WHERE	qs.content LIKE('câu hỏi%');
-
 DELETE a
 FROM	answers a
 INNER JOIN	questions qs
@@ -205,12 +244,36 @@ INNER JOIN	questions qs
 WHERE	qs.content LIKE('câu hỏi%');
 
 --  DELETE questions 
+DELETE FROM	questions
+WHERE	content LIKE('câu hỏi%');
+
 SELECT	*
 FROM	questions
 WHERE	content LIKE('câu hỏi%');
 
-DELETE FROM	questions
-WHERE	content LIKE('câu hỏi%');
+--  exam_questions =>  answers => questions
+-- C1 
+-- DELETE 	questions.*,
+-- 		answers.*,
+-- 		exam_questions.*
+-- FROM	questions
+-- INNER JOIN	answers
+-- 	ON	questions.question_id = answers.question_id
+-- INNER JOIN	exam_questions
+-- 	ON	answers.question_id = exam_questions.question_id
+-- WHERE	questions.content LIKE('câu hỏi%');
+
+-- C2
+-- DELETE 	questions.*,
+-- 		answers.*,
+--         exam_questions.*
+-- FROM	questions,
+-- 		answers,
+--         exam_questions
+-- WHERE	(
+-- 			questions.question_id = answers.question_id
+--             OR questions.question_id = exam_questions.question_id)
+-- AND questions.content LIKE('câu hỏi%');
 
 -- Question 14: Update thông tin của account có id = 5 thành tên "Nguyễn Bá Lộc" và 
 --  email thành loc.nguyenba@vti.com.vn

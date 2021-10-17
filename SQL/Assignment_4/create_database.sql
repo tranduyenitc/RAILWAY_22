@@ -31,9 +31,9 @@ CREATE TABLE IF NOT EXISTS positions(
 
 CREATE TABLE IF NOT EXISTS `accounts`(
 	account_id		INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,	
-    email			NVARCHAR(100) UNIQUE NOT NULL,
+    email			NVARCHAR(50) NOT NULL,
     username		NVARCHAR(50) NOT NULL,
-    fullname		NVARCHAR(200) NOT NULL,
+    fullname		NVARCHAR(100) NOT NULL,
     gender			BIT DEFAULT 1,
     department_id	TINYINT UNSIGNED,
     position_id		TINYINT UNSIGNED,
