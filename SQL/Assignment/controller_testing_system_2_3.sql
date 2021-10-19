@@ -198,22 +198,6 @@ DELETE eq
 
 DELETE FROM exams
 WHERE	createdate < '20191220';
- 
--- C1
--- DELETE 	exams.*,
--- 		exam_questions.*
--- FROM	exams
--- INNER JOIN	exam_questions
--- 	ON	exams.exam_id = exam_questions.exam_id
--- WHERE	exams.createdate < '20191220';
-
--- C2 
--- DELETE 	exams.*,
--- 		exam_questions.*
--- FROM	exams,
--- 		exam_questions
--- WHERE	exams.exam_id = exam_questions.exam_id AND exams.createdate < '20191220';
--- -- 
 
 -- Question 13: Xóa tất cả các question có nội dung bắt đầu bằng từ "câu hỏi"
 --  exam_questions =>  answers => questions 
@@ -256,28 +240,6 @@ FROM	questions
 WHERE	content LIKE('câu hỏi%');
 
 --  exam_questions =>  answers => questions
--- C1 
--- DELETE 	questions.*,
--- 		answers.*,
--- 		exam_questions.*
--- FROM	questions
--- INNER JOIN	answers
--- 	ON	questions.question_id = answers.question_id
--- INNER JOIN	exam_questions
--- 	ON	answers.question_id = exam_questions.question_id
--- WHERE	questions.content LIKE('câu hỏi%');
-
--- C2
--- DELETE 	questions.*,
--- 		answers.*,
---         exam_questions.*
--- FROM	questions,
--- 		answers,
---         exam_questions
--- WHERE	(
--- 			questions.question_id = answers.question_id
---             OR questions.question_id = exam_questions.question_id)
--- AND questions.content LIKE('câu hỏi%');
 
 -- Question 14: Update thông tin của account có id = 5 thành tên "Nguyễn Bá Lộc" và 
 --  email thành loc.nguyenba@vti.com.vn
@@ -291,14 +253,6 @@ SET		fullname = 'Nguyễn Bá Lộc',
 WHERE 	account_id = 5;
 
 -- Question 15: update account có id = 5 sẽ thuộc group có id = 4 
-
--- SELECT	a.account_id,
--- 		g.group_id
--- FROM	`accounts` a
--- INNER JOIN `groups` g
--- 	ON	a.account_id = g.creator_id
--- WHERE	a.account_id = 5
--- ;
 
 SELECT *
 FROM	group_accounts
