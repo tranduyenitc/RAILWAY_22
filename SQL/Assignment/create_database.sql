@@ -103,7 +103,6 @@ CREATE TABLE IF NOT EXISTS exams(
     creator_id	INT UNSIGNED,
     createdate	DATE,
     
-    -- FOREIGN KEY(category_id) REFERENCES category_questions(category_id),
     FOREIGN KEY(creator_id) REFERENCES `accounts`(account_id)
 );
 
