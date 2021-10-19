@@ -2,7 +2,7 @@ USE sql_assignment;
 -- Exercise 1: Tiếp tục với Database Testing System
 -- (Sử dụng subquery hoặc CTE)
 -- Question 1: Tạo view có chứa danh sách nhân viên thuộc phòng ban sale
-CREATE OR REPLACE VIEW ds_nv_sale AS
+CREATE  VIEW ds_nv_sale AS
 SELECT a.*
 FROM accounts a 
 INNER JOIN departments d 
@@ -13,7 +13,7 @@ SELECT *
 FROM	ds_nv_sale;
 
 -- Question 2: Tạo view có chứa thông tin các account tham gia vào nhiều group nhất
-CREATE OR REPLACE VIEW account_joins_many_groups AS 
+CREATE  VIEW account_joins_many_groups AS 
 SELECT 	a.*,
 		COUNT(g.account_id) number_groups_joined
 FROM accounts a 
@@ -33,7 +33,7 @@ FROM account_joins_many_groups;
 -- Question 3: Tạo view có chứa câu hỏi có những content quá dài (content quá 30 kí tự
 --  được coi là quá dài) và xóa nó đi
 
-CREATE OR REPLACE VIEW  questions_length30_content AS 
+CREATE  VIEW  questions_length30_content AS 
 
 SELECT *,
 		length(q.content) length_content
@@ -46,7 +46,7 @@ FROM questions_length30_content;
 DROP VIEW IF EXISTS questions_length30_content;
 
 -- Question 4: Tạo view có chứa danh sách các phòng ban có nhiều nhân viên nhất
-CREATE OR REPLACE VIEW department_many_accounts AS
+CREATE  VIEW department_many_accounts AS
 
 SELECT d.*
 FROM departments d
@@ -64,7 +64,7 @@ HAVING COUNT(a.account_id) = (	SELECT COUNT(a.account_id)
 SELECT * FROM department_many_accounts;
 
 -- Question 5: Tạo view có chứa tất các các câu hỏi do user họ Nguyễn tạo
-CREATE OR REPLACE VIEW questions_by_creator_nguyen AS (	SELECT q.*
+CREATE  VIEW questions_by_creator_nguyen AS (	SELECT q.*
 												FROM questions q
 												INNER JOIN accounts a
 													ON	q.creator_id = a.account_id
