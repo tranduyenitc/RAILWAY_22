@@ -76,7 +76,6 @@ VALUES 					(N'Câu hỏi về Java'	,	1			,   '1'			,   '2'			,'2020-04-05'	),
 						(N'Hỏi về C++'		,	8			,   '1'			,   '8'			,'2020-04-07'	),
 						(N'Hỏi về SQL'		,	4			,   '2'			,   '9'			,'2020-04-07'	),
 						(N'Hỏi về Python'	,	7			,   '1'			,   '10'		,'2020-04-07'	),
-                        (N'Hỏi về PythonCâu hỏi về JavaCâu hỏi về JavaCâu hỏi về JavaCâu hỏi về Java'	,	7			,   '1'			,   '10'		,'2020-04-07'	);
     
 -- INSERT DATA TO TABLE answers
 INSERT INTO answers	(content		, question_id	, iscorrect	)
