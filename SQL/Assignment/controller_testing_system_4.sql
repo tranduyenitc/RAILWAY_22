@@ -1,7 +1,6 @@
 USE sql_assignment;
 -- Exercise 1: Join
 -- Question 1: Viết lệnh để lấy ra danh sách nhân viên và thông tin phòng ban của họ
--- C1
 SELECT	account_id TT,
 		fullname,
 		username,
@@ -49,31 +48,12 @@ FROM	questions q
 INNER JOIN	exam_questions eq
 	ON	q.question_id = eq.question_id
 GROUP BY q.question_id
-	HAVING COUNT(q.question_id) = 	(
-										SELECT COUNT(q.question_id)
-                                        FROM questions q
-                                        INNER JOIN	exam_questions eq
-                                        ON	q.question_id = eq.question_id
-                                        GROUP BY q.question_id
-                                        ORDER BY COUNT(q.question_id) DESC
+	HAVING COUNT(q.question_id) = 	(	SELECT COUNT(question_id)
+                                        FROM exam_questions 
+                                        GROUP BY question_id
+                                        ORDER BY COUNT(question_id) DESC
                                         LIMIT 1
 									);
-                                    
--- SELECT	q.content,
--- 		COUNT(q.question_id)
---         -- MAX(COUNT(q.question_id))
--- FROM	questions q
--- INNER JOIN	exam_questions eq
--- 	ON	q.question_id = eq.question_id
--- GROUP BY q.question_id
--- 	HAVING COUNT(q.question_id) = 	(
--- 										SELECT	*
--- 											-- MAX(COUNT(q.question_id))
--- 										FROM	questions q
--- 										INNER JOIN	exam_questions eq
--- 											ON	q.question_id = eq.question_id
--- 										GROUP BY COUNT(q.question_id)
--- 									);
                                     
 -- -- Question 5: Viết lệnh để lấy ra danh sách câu hỏi được sử dụng trong đề thi ít 
 --  nhất
@@ -153,14 +133,10 @@ FROM	`groups`;
 SELECT 	-- ga.group_id,
 		g.group_name,
         COUNT(ga.account_id) total_accounts
-FROM accounts a
-RIGHT JOIN group_accounts ga
-	ON	a.account_id = ga.account_id
+FROM group_accounts ga
 RIGHT JOIN	`groups` g
 	ON ga.group_id = g.group_id
--- -- WHERE g.group_id IS NULL
 GROUP BY ga.group_id;
-
 
 -- Question 10: Tìm chức vụ có ít người nhất
 SELECT	position_name

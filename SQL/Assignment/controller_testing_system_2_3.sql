@@ -95,7 +95,7 @@ WHERE	length(fullname)	=	(
 
 -- Question 5: Lấy ra thông tin account có full name dài nhất và thuộc phòng ban có id 
 --  = 3
--- C1 -- -- Xem lai-- -- 
+-- C1 
 SELECT	*
 FROM	`accounts`
 GROUP BY	length(fullname)
@@ -108,16 +108,8 @@ SELECT	*
 FROM	`accounts`
 WHERE	department_id =3
 ORDER BY	length(fullname) DESC
-LIMIT 1;
--- C3-- -- thong ke theo độ dài rồi ==> xet department_id = 3 
--- SELECT	*,
--- 		length(fullname)
--- FROM	`accounts`
--- GROUP BY	department_id,length(fullname)
--- 	HAVING	department_id = 3 && length(fullname) = (
--- 														SELECT MAX(length(fullname))
---                                                         FROM `accounts`
---                                                         GROUP BY department_id); 
+LIMIT 1
+;
 
 -- Question 6: Lấy ra tên group đã tham gia trước ngày 20/12/2019
 
@@ -202,6 +194,10 @@ DELETE eq
       INNER JOIN exams e 
 		ON eq.exam_id = e.exam_id
  WHERE e.createdate < '20191220';
+ 
+
+DELETE FROM exams
+WHERE	createdate < '20191220';
  
 -- C1
 -- DELETE 	exams.*,
