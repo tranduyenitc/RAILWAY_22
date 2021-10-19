@@ -189,10 +189,6 @@ GROUP BY	p.position_id
                                     );
 
 -- Question 11: Thống kê mỗi phòng ban có bao nhiêu dev, test, scrum master, PM
--- -- 1 department ==> n accounts ==> 	Dev				
--- 										Test
--- 										Scrum Master
---                                      PM
 
 SELECT	*
 FROM accounts;
