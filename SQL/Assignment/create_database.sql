@@ -91,7 +91,7 @@ CREATE TABLE IF NOT EXISTS answers(
     question_id	INT UNSIGNED,
     iscorrect	BIT DEFAULT 1,
     
-    FOREIGN KEY(question_id) REFERENCES questions(question_id)
+    FOREIGN KEY(question_id) REFERENCES questions(question_id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS exams(
@@ -103,6 +103,7 @@ CREATE TABLE IF NOT EXISTS exams(
     creator_id	INT UNSIGNED,
     createdate	DATE,
     
+    -- FOREIGN KEY(category_id) REFERENCES category_questions(category_id),
     FOREIGN KEY(creator_id) REFERENCES `accounts`(account_id)
 );
 
@@ -111,6 +112,6 @@ CREATE TABLE IF NOT EXISTS exam_questions(
     question_id	INT UNSIGNED,
     
     PRIMARY KEY(exam_id,question_id),
-    FOREIGN KEY(exam_id) REFERENCES exams(exam_id),
-    FOREIGN KEY(question_id) REFERENCES questions(question_id)
+    FOREIGN KEY(exam_id) REFERENCES exams(exam_id) ON DELETE CASCADE,
+    FOREIGN KEY(question_id) REFERENCES questions(question_id) ON DELETE CASCADE
 );
